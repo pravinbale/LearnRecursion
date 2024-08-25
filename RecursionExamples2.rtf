@@ -1,0 +1,221 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\b\f0\fs22\lang9    ---------------------------------RECURSION MEDIUM LEVEL QUESTIONS---------------------------------\par
+Q. Tower of Hanoi ?\par
+Rules:\par
+1.Only one disk transferred in one step.\par
+2.Smaller disks are always kept on top of larger disk?\par
+\b0 public class TowerOfHanoi\par
+\{\par
+\tab public static void towerOfHanoi(int N, String src, String helper, String dest) \{\par
+\tab\tab if(N==1) \{\par
+\tab\tab     System.out.println("Transfer disk " + N + " from " + src + " to " + dest);\par
+\tab\tab     return;\par
+\tab\tab\}\par
+\tab\tab towerOfHanoi(N-1, src, dest ,  helper);\par
+\tab\tab System.out.println("Transfer disk " + N + " from " + src + " to " + dest);\par
+\tab\tab towerOfHanoi(N-1, helper, src ,  dest);\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab int N=3;\par
+\tab\tab towerOfHanoi(N, "S", "H", "D");\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(2^n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\fs22\par
+Q. Print a string in reverse?\par
+\b0 public class ReverseString\par
+\{\par
+\tab public static void reverseString(String str, int idx) \{\par
+\tab\tab if(idx==-1) \{\par
+\tab\tab     return;\par
+\tab\tab\}\par
+\tab\tab System.out.print(str.charAt(idx));\par
+\tab     \tab reverseString(str, --idx);\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="abcd";\par
+\tab\tab int idx=str.length()-1;\par
+\tab\tab reverseString(str, idx);\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\fs22\par
+Q. Find the first and last occurance of element in a  string?\par
+\b0 public class FindOccurance\par
+\{\par
+    public static int first=-1;\par
+    public static int last=-1;\par
+\tab public static void findOccurance(String str, int idx, char element) \{\par
+\tab\tab if(idx==str.length()) \{\par
+\tab\tab     return;\par
+\tab\tab\}\par
+\tab\tab char currChar=str.charAt(idx);\par
+\tab\tab if(currChar==element)\{\par
+\tab\tab     if(first==-1)\{\par
+\tab\tab         first=idx;\par
+\tab\tab     \}else\{\par
+\tab\tab         last=idx;\par
+\tab\tab     \}\par
+\tab\tab\}\par
+\tab\tab findOccurance(str, ++idx, element);\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="abcakjkjhfsaaaanndad";\par
+\tab\tab int idx=0;\par
+\tab\tab char element='a';\par
+\tab\tab findOccurance(str, idx, element);\par
+\tab\tab System.out.println("First Occurance : " + first);\par
+\tab\tab System.out.println("Last Occurance : " + last);\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\b0\fs22\par
+\b Q. Check if an array is sorted (Strictly Increasing)?\par
+\b0 public class CheckSortedArray\par
+\{\par
+\tab public static boolean checkSortedArray(int[] nums, int idx) \{\par
+\tab\tab if(idx==nums.length-1) \{\par
+\tab\tab     return true;\par
+\tab\tab\}\par
+\tab\tab if(!(nums[idx] < nums[idx+1]))\{\par
+\tab\tab     return false;\par
+\tab\tab\}\par
+\tab\tab return checkSortedArray(nums, ++idx);\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab int[] nums=\{1,2,3,4,5\};\par
+\tab\tab int idx=0;\par
+\tab\tab boolean ans=checkSortedArray(nums, idx);\par
+\tab\tab System.out.println("Array is Sorted : " + ans);\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\fs22\par
+Q. Move all 'X' to the end of string?\par
+\b0 public class MoveXToEnd\par
+\{\par
+\tab public static void moveXToEnd(String str, int idx, StringBuilder newStr, char ch, int count) \{\par
+\tab\tab if(idx==str.length()) \{\par
+\tab\tab\tab for(int i=0; i<count; i++) \{\par
+\tab\tab\tab\tab newStr.append("x");\par
+\tab\tab\tab\}\par
+\tab\tab\tab System.out.println(newStr);\par
+\tab\tab\tab return;\par
+\tab\tab\}\par
+\tab\tab char currChar=str.charAt(idx);\par
+\tab\tab if(currChar==ch)\{\par
+\tab\tab     count++;\par
+\tab\tab     moveXToEnd(str, ++idx, newStr, ch, count);\par
+\tab\tab\}else\{\par
+\tab\tab     newStr.append(currChar);\par
+\tab\tab     moveXToEnd(str, ++idx, newStr, ch, count);\par
+\tab\tab\}\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="axbcxxd";\par
+\tab\tab int idx=0;\par
+\tab\tab char ch='x';\par
+\tab\tab int count=0;\par
+\tab\tab moveXToEnd(str, idx, new StringBuilder(""), ch, count);\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\fs22\par
+Q. Remove duplicates from string?\par
+\b0 public class RemoveDuplicates\par
+\{\par
+   \tab public static boolean[] map=new boolean[26];\par
+\tab public static void removeDuplicates(String str, int idx, String newStr) \{\par
+\tab\tab if(idx==str.length()) \{\par
+\tab\tab\tab System.out.println(newStr);\par
+\tab\tab\tab return;\par
+\tab\tab\}\par
+\tab\tab char currChar=str.charAt(idx);\par
+\tab\tab if(map[currChar - 'a'])\{\par
+\tab\tab     removeDuplicates(str, ++idx, newStr);\par
+\tab\tab\}else\{\par
+\tab\tab     newStr+=currChar;\par
+\tab\tab     map[currChar - 'a']=true;\par
+\tab\tab     removeDuplicates(str, ++idx, newStr);\par
+\tab\tab\}\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="abbccda";\par
+\tab\tab int idx=0;\par
+\tab\tab removeDuplicates(str, idx, "");\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\fs22\par
+Q. Print all the subsequences of string?\par
+\b0 public class PrintSubSequences\par
+\{\par
+\tab public static void printSubSequences(String str, int idx, String newStr) \{\par
+\tab\tab if(idx==str.length()) \{\par
+\tab\tab\tab System.out.println(newStr);\par
+\tab\tab\tab return;\par
+\tab\tab\}\par
+\tab\tab char currChar=str.charAt(idx);\par
+\tab    \tab printSubSequences( str, idx+1, newStr+currChar);\par
+\tab     \tab printSubSequences( str, idx+1, newStr);\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="abc";\par
+\tab\tab int idx=0;\par
+\tab\tab printSubSequences(str, idx, "");\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(2^n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\b0\fs22\par
+\b Q. Print all the Unique subsequences of string?\par
+\b0 import java.util.HashSet;\par
+public class PrintUnqueSubSequences\par
+\{\par
+\tab public static void printUniqueSubSequences(String str, int idx, String newStr, \tab HashSet<String> set) \{\par
+\tab\tab if(idx==str.length()) \{\par
+\tab\tab\tab if(set.contains(newStr))\{\par
+\tab\tab\tab     return;\par
+\tab\tab\tab\}else\{\par
+\tab\tab\tab     set.add(newStr);\par
+\tab\tab\tab     System.out.println(newStr);\par
+\tab\tab\tab     return;\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab char currChar=str.charAt(idx);\par
+\tab    \tab printUniqueSubSequences( str, idx+1, newStr+currChar, set);\par
+\tab     \tab printUniqueSubSequences( str, idx+1, newStr, set);\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="aaa";\par
+\tab\tab int idx=0;\par
+\tab\tab HashSet<String> set= new HashSet<>();\par
+\tab\tab printUniqueSubSequences(str, idx, "", set);\par
+\tab\}\par
+\}\par
+\b Time Complexity :-O(2^n)\par
+    \fs24 -------------------------------------------------------*****----------------------------------------------------\fs22\par
+Q. Print Keypad Combinations?\par
+\b0 public class PrintCombinations\par
+\{\par
+\tab public static String[] keypad = \{".","abc","def", "ghi", "jkl", "mno", "pqrs", "tu", "vwx", "yz"\};\par
+\tab public static void printCombinations(String str, int idx, String combination)\{\par
+\tab     if(idx==str.length())\{\par
+\tab         System.out.println(combination);\par
+\tab         return;\par
+\tab     \}\par
+\tab     char currChar = str.charAt(idx);\par
+\tab     String mapping = keypad[currChar - '0'];\par
+\tab     for(int i=0; i<mapping.length();i++)\{\par
+\tab         printCombinations( str, idx+1, combination+mapping.charAt(i));\par
+\tab     \}\par
+\tab\}\par
+\tab public static void main(String[] args) \{\par
+\tab\tab String str="23";\par
+\tab\tab int idx=0;\par
+\tab\tab printCombinations( str, idx, "");\par
+\tab\}\par
+\}\par
+\b  ##############################################################################\par
+}
+ 
